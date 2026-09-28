@@ -23,3 +23,9 @@
 - **Evidência:** commit "docs: requisitos e critérios de aceitação"; PDF p. 8 e p. 10-11.
 
 Obs.: o requisitos.md apareceu vazio no projeto antes do commit. Foi reconstruído com apoio do Claude (chat), a partir da primeira versão gerada pelo Claude Code e da lista de alterações aprovadas. Nessa reconstrução, a equipe incluiu 3 requisitos novos: equilíbrio mensal × recuperação de investimento, significado dos campos e origem dos dados (RNF-07), e não recomendar quando nenhum cenário é viável.
+## Observação – README inicial
+- **Data:** 28/09/2026
+- **Ferramenta:** Claude (chat), fora da IDE
+- **Objetivo:** Rascunho inicial do README.md.
+- **Verificação humana:** Revisamos integrantes, indicadores, premissas e dados de exemplo. Instruções de execução e testes ficaram marcadas "a confirmar" até os Passos 4 e 5.
+- **Decisão:** ACEITA com ajustes (Isabela e Wanessa).
