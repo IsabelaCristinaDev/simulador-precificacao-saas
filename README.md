@@ -1,3 +1,10 @@
+## Observação – README inicial
+- **Data:** 28/09/2026
+- **Ferramenta:** Claude (chat), fora da IDE
+- **Objetivo:** Rascunho inicial do README.md.
+- **Verificação humana:** Revisamos integrantes, indicadores, premissas e dados de exemplo. Instruções de execução e testes ficaram marcadas "a confirmar" até os Passos 4 e 5.
+- **Decisão:** ACEITA com ajustes (integrantes).
+
 # Simulador de Precificação de um SaaS
 
 Aplicação de apoio à decisão desenvolvida para a atividade **"Desenvolvimento de Aplicações de Apoio à Decisão com Agentes de IA"** — Opção 2.
