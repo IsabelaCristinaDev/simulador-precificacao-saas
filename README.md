@@ -1,5 +1,4 @@
 
-
 # Simulador de Precificação de um SaaS
 
 Aplicação de apoio à decisão desenvolvida para a atividade **"Desenvolvimento de Aplicações de Apoio à Decisão com Agentes de IA"** — Opção 2.

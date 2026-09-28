@@ -29,3 +29,15 @@ Obs.: o requisitos.md apareceu vazio no projeto antes do commit. Foi reconstruí
 - **Objetivo:** Rascunho inicial do README.md.
 - **Verificação humana:** Revisamos integrantes, indicadores, premissas e dados de exemplo. Instruções de execução e testes ficaram marcadas "a confirmar" até os Passos 4 e 5.
 - **Decisão:** ACEITA com ajustes (Isabela e Wanessa).
+
+## Interação 3 – Verificação das dependências do pom.xml
+- **Data:** 28/09/2026
+- **Integrante responsável:** Isabela e Wanessa
+- **Objetivo:** Verificar a afirmação da IA (Interação 1) de que os starters `spring-boot-starter-webmvc-test` e `spring-boot-starter-validation-test` não seriam nomes oficiais e fariam o build falhar.
+- **Prompt utilizado:** Nenhum novo. Verificação feita pela equipe após a sugestão da Interação 1.
+- **Arquivos alterados:** nenhum (pom.xml mantido como gerado pelo IntelliJ/Spring Initializr).
+- **Sugestão da IA:** Corrigir os nomes dos starters no pom.xml no Passo 4.
+- **Verificação humana:** Executamos "Reload All Maven Projects" e `mvnw.cmd clean test`. Todas as dependências foram resolvidas; resultado BUILD SUCCESS, 1 teste executado, 0 falhas. Os nomes são válidos na versão do Spring Boot usada no projeto (starters modulares).
+- **Decisão:** REJEITADA. O pom.xml não será alterado. A IA provavelmente se baseou em convenções de uma versão anterior do Spring Boot.
+- **Evidência:** docs/evidencias/build_pom.png (saída do build com BUILD SUCCESS).
+

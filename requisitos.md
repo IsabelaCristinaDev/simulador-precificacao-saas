@@ -223,6 +223,4 @@ cinco projetos" (PDF, página 5), conforme revisões da equipe em 28/09/2026.
    (R$ 44,444...) — decidir no Passo 3.
 4. Técnica de gráfico sem dependência externa (RNF-05) — proposta virá no
    Passo 6.
-5. Verificação pendente: confirmar se as dependências do `pom.xml` atual
-   resolvem no build antes de decidir se há erro nos nomes dos starters —
-   não alterado aqui.
+5. ~~Verificação do pom.xml~~ — **Resolvida em 28/09/2026:** build executado com BUILD SUCCESS; dependências válidas; nenhuma alteração necessária.
