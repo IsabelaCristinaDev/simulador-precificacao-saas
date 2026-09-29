@@ -215,12 +215,20 @@ cinco projetos" (PDF, página 5), conforme revisões da equipe em 28/09/2026.
 
 ## 8. Pendências abertas para a próxima revisão
 
-1. Definir o intervalo/passo de clientes do gráfico (RF-06) — proposta
-   virá no Passo 3.
-2. Definir o comportamento com `custo_fixo = 0`, que o PDF não especifica
-   — decidir no Passo 3.
-3. Definir o arredondamento de exibição do preço que zera o resultado
-   (R$ 44,444...) — decidir no Passo 3.
+1. Definir o intervalo/passo de clientes do gráfico (RF-06) — **Proposta
+   registrada em 29/09/2026** em `modelo_calculos.md` §9, ainda **aguardando
+   revisão da equipe** (não é decisão fechada).
+2. ~~Definir o comportamento com `custo_fixo = 0`~~ — **Decidida em
+   29/09/2026:** `custo_fixo = 0` é entrada válida; `clientes_equilibrio = 0`
+   em todos os casos (não há custo fixo a cobrir); se a contribuição
+   unitária for negativa, a aplicação informa que cada cliente adicional
+   gera resultado negativo. Ver `modelo_calculos.md` §8.
+3. ~~Definir o arredondamento de exibição do preço que zera o resultado~~
+   (R$ 44,444...) — **Decidida em 29/09/2026:** manter precisão total no
+   `BigDecimal` internamente; exibir arredondado **para cima** até o
+   centavo (R$ 44,45), mesma lógica de teto usada em `clientes_equilibrio`,
+   pois R$ 44,44 ainda gera resultado negativo (−R$ 0,40). Ver
+   `modelo_calculos.md` §7 e §10.
 4. Técnica de gráfico sem dependência externa (RNF-05) — proposta virá no
    Passo 6.
 5. ~~Verificação do pom.xml~~ — **Resolvida em 28/09/2026:** build executado com BUILD SUCCESS; dependências válidas; nenhuma alteração necessária.

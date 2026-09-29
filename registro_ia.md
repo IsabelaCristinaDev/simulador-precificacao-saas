@@ -51,4 +51,10 @@
 - **Revisão:** Na revisão do cálculo manual, identificamos e corrigimos dois erros de escrita: faltava "− 1.000" (custo variável total) na linha do resultado, e o custo fixo estava escrito como 300 em vez de 3.000 na dedução do preço que zera o resultado.
 - **Planilha complementar:** docs/evidencias/caso_manual.xlsx, com estrutura gerada com apoio do Claude (chat), cobrindo os três cenários (R$ 40/50/70) e a comparação entre teto e arredondamento comum. Valores conferidos com o cálculo manual.
 - **Resultado:** Todos os valores conferem com o teste de referência do PDF: receita R$ 5.000, tributos R$ 500, resultado R$ 500, margem 10%, contribuição R$ 35, equilíbrio 86 clientes.
-- 
+
+### 29/09/2026 — Modelo de cálculos (Passo 3)
+
+- **O que a IA fez:** criou o `modelo_calculos.md` (variáveis, fórmulas, convenções de sinal, limites do modelo, deduções algébricas, caso de referência e comparação com o cálculo manual) e atualizou a seção 8 do `requisitos.md`, marcando as pendências 2 e 3 como decididas.
+- **O que a equipe conferiu:** os valores do caso de referência (preço R$ 50) contra o cálculo manual (`docs/evidencias/calculo1` a `calculo4`): receita R$ 5.000, tributos R$ 500, resultado R$ 500, contribuição R$ 35, margem 10%, equilíbrio 86 clientes (85 → −R$ 25; 86 → +R$ 10) e preço que zera R$ 44,45 (R$ 44,44 → −R$ 0,40; R$ 44,45 → +R$ 0,50). Todos bateram.
+- **Correção pedida:** o cabeçalho do `modelo_calculos.md` dizia que as pendências 1, 2 e 3 estavam fechadas, mas a pendência 1 (intervalo do gráfico) continua aberta. Foi pedida e aprovada a correção dessa frase.
+- **Pendente:** a equipe precisa aprovar a proposta de intervalo/passo do gráfico (seção 9 do `modelo_calculos.md`) para fechar a pendência 1.
