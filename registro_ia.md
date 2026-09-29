@@ -22,7 +22,8 @@
 - **Decisão:** ALTERADA. Criado o RF-11 (sensibilidade, obrigatório). Incluídos os casos 7 e 8 (85 clientes → −R$ 25,00; 86 → +R$ 10,00), todos os 8 casos marcados para JUnit, validação de clientes não inteiros, menção a premissas e horizonte no RF-10 e destaque das premissas alteradas no RF-05. R$ 40 aprovado, com a simplificação de 100 clientes registrada. Custo fixo zero e arredondamento do preço de equilíbrio ficaram para o Passo 3.
 - **Evidência:** commit "docs: requisitos e critérios de aceitação"; PDF p. 8 e p. 10-11.
 
-Obs.: o requisitos.md apareceu vazio no projeto antes do commit. Foi reconstruído com apoio do Claude (chat), a partir da primeira versão gerada pelo Claude Code e da lista de alterações aprovadas. Nessa reconstrução, a equipe incluiu 3 requisitos novos: equilíbrio mensal × recuperação de investimento, significado dos campos e origem dos dados (RNF-07), e não recomendar quando nenhum cenário é viável.
+- **Obs.:** o requisitos.md apareceu vazio no projeto antes do commit. Foi reconstruído com apoio do Claude (chat), a partir da primeira versão gerada pelo Claude Code e da lista de alterações aprovadas. Nessa reconstrução, a equipe incluiu 3 requisitos novos: equilíbrio mensal × recuperação de investimento, significado dos campos e origem dos dados (RNF-07), e não recomendar quando nenhum cenário é viável.
+
 ## Observação – README inicial
 - **Data:** 28/09/2026
 - **Ferramenta:** Claude (chat), fora da IDE
@@ -41,3 +42,13 @@ Obs.: o requisitos.md apareceu vazio no projeto antes do commit. Foi reconstruí
 - **Decisão:** REJEITADA. O pom.xml não será alterado. A IA provavelmente se baseou em convenções de uma versão anterior do Spring Boot.
 - **Evidência:** docs/evidencias/build_pom.png (saída do build com BUILD SUCCESS).
 
+
+## Observação – Caso de referência resolvido à mão
+- **Data:** 28/09/2026
+- **Integrantes:** Isabela e Wanessa
+- **Objetivo:** Resolver o caso de referência (preço R$ 50) independentemente do agente, conforme exigido no Passo 3 do PDF.
+- **Como foi feito:** Cálculo manual no papel (receita, tributos, resultado, contribuição unitária, margem, equilíbrio, teste 85/86 clientes e preço que zera o resultado). Fotos em docs/evidencias/calculo1.jpeg a calculo4.jpeg.
+- **Revisão:** Na revisão do cálculo manual, identificamos e corrigimos dois erros de escrita: faltava "− 1.000" (custo variável total) na linha do resultado, e o custo fixo estava escrito como 300 em vez de 3.000 na dedução do preço que zera o resultado.
+- **Planilha complementar:** docs/evidencias/caso_manual.xlsx, com estrutura gerada com apoio do Claude (chat), cobrindo os três cenários (R$ 40/50/70) e a comparação entre teto e arredondamento comum. Valores conferidos com o cálculo manual.
+- **Resultado:** Todos os valores conferem com o teste de referência do PDF: receita R$ 5.000, tributos R$ 500, resultado R$ 500, margem 10%, contribuição R$ 35, equilíbrio 86 clientes.
+- 
