@@ -52,9 +52,14 @@
 - **Planilha complementar:** docs/evidencias/caso_manual.xlsx, com estrutura gerada com apoio do Claude (chat), cobrindo os três cenários (R$ 40/50/70) e a comparação entre teto e arredondamento comum. Valores conferidos com o cálculo manual.
 - **Resultado:** Todos os valores conferem com o teste de referência do PDF: receita R$ 5.000, tributos R$ 500, resultado R$ 500, margem 10%, contribuição R$ 35, equilíbrio 86 clientes.
 
-### 29/09/2026 — Modelo de cálculos (Passo 3)
-
-- **O que a IA fez:** criou o `modelo_calculos.md` (variáveis, fórmulas, convenções de sinal, limites do modelo, deduções algébricas, caso de referência e comparação com o cálculo manual) e atualizou a seção 8 do `requisitos.md`, marcando as pendências 2 e 3 como decididas.
-- **O que a equipe conferiu:** os valores do caso de referência (preço R$ 50) contra o cálculo manual (`docs/evidencias/calculo1` a `calculo4`): receita R$ 5.000, tributos R$ 500, resultado R$ 500, contribuição R$ 35, margem 10%, equilíbrio 86 clientes (85 → −R$ 25; 86 → +R$ 10) e preço que zera R$ 44,45 (R$ 44,44 → −R$ 0,40; R$ 44,45 → +R$ 0,50). Todos bateram.
-- **Correção pedida:** o cabeçalho do `modelo_calculos.md` dizia que as pendências 1, 2 e 3 estavam fechadas, mas a pendência 1 (intervalo do gráfico) continua aberta. Foi pedida e aprovada a correção dessa frase.
-- **Pendente:** a equipe precisa aprovar a proposta de intervalo/passo do gráfico (seção 9 do `modelo_calculos.md`) para fechar a pendência 1.
+## Interação 4 – Modelo de cálculos (Passo 3)
+- **Data:** 29/09/2026
+- **Integrante responsável:** Isabela e Wanessa
+- **Objetivo:** Documentar variáveis, unidades, fórmulas, convenções de sinal e limites do modelo; resolver o caso de referência passo a passo e comparar com o cálculo manual da equipe.
+- **Prompt utilizado:** Prompt do Passo 3 do PDF, com as decisões da equipe sobre custo fixo zero, arredondamento do preço que zera o resultado e pedido de proposta para o intervalo do gráfico.
+- **Arquivos alterados:** modelo_calculos.md (criado); requisitos.md (seção 8 atualizada).
+- **Sugestão da IA:** Documento com 14 seções: mês zero declarado como não aplicável, deduções algébricas do preço que zera o resultado e dos clientes de equilíbrio, caso de referência passo a passo e proposta de intervalo do gráfico. Cabeçalho afirmava que o documento fechava as pendências 1, 2 e 3.
+- **Verificação humana:** Conferimos os valores contra o cálculo manual (docs/evidencias/calculo1 a calculo4.jpeg): receita R$ 5.000, tributos R$ 500, resultado R$ 500, contribuição R$ 35, margem 10%, equilíbrio 86 (85 → −R$ 25; 86 → +R$ 10), preço que zera R$ 44,45 (44,44 → −R$ 0,40; 44,45 → +R$ 0,50). Todos bateram. Identificamos contradição no cabeçalho: a pendência 1 (intervalo do gráfico) continuava aberta.
+- **Decisão:** ALTERADA. Pedimos correção apenas da frase do cabeçalho (fecha as pendências 2 e 3; pendência 1 com proposta aguardando revisão). Demais conteúdos aceitos.
+- **Evidência:** commit "docs: modelo de cálculos e decisões das pendências 2 e 3".
+- **Pendente:** aprovar a proposta de intervalo/passo do gráfico (seção 9 do modelo_calculos.md).
