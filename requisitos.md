@@ -44,7 +44,13 @@ resultado             = receita - custo_fixo - custo_variavel * clientes - tribu
 contribuicao_unitaria = preco * (1 - taxa) - custo_variavel
 margem_percentual     = 100 * resultado / receita         (somente se receita > 0)
 clientes_equilibrio   = teto(custo_fixo / contribuicao_unitaria)   (somente se contribuicao_unitaria > 0)
+
+custo_variavel_total  = custo_variavel * clientes
+custo_total           = custo_fixo + custo_variavel_total
 ```
+
+`custo_variavel_total` e `custo_total` são fórmulas auxiliares de saída,
+não alteram as fórmulas do PDF.
 
 Se `contribuicao_unitaria <= 0` e `custo_fixo > 0`: não existe
 `clientes_equilibrio` numérico — a aplicação deve informar que **não há
@@ -57,16 +63,18 @@ equilíbrio por aumento de volume nesse modelo**.
   mensal, quantidade de clientes, taxa de tributos (%), benefício
   percebido (texto).
 - **Ação:** usuário preenche o formulário e aciona "Calcular".
-- **Resultado observável:** a aplicação exibe receita, tributos, resultado,
-  contribuição unitária, margem (quando aplicável) e clientes de
-  equilíbrio (ou a mensagem de não equilíbrio) para aquele cenário.
+- **Resultado observável:** a aplicação exibe receita, custo variável
+  total, custo total, tributos, resultado, contribuição unitária, margem
+  (quando aplicável) e clientes de equilíbrio (ou a mensagem de não
+  equilíbrio) para aquele cenário.
 
-### RF-02 — Cálculo de receita, tributos e resultado
+### RF-02 — Cálculo de receita, custos, tributos e resultado
 - **Entrada:** Fixos R$ 3.000; variável R$ 10; preço R$ 50; clientes 100;
   taxa 10%.
 - **Ação:** sistema aplica as fórmulas da seção 2.
-- **Resultado observável:** receita R$ 5.000,00; tributos R$ 500,00;
-  resultado R$ 500,00 (tolerância R$ 0,01).
+- **Resultado observável:** receita R$ 5.000,00; custo variável total
+  R$ 1.000,00; custo total R$ 4.000,00; tributos R$ 500,00; resultado
+  R$ 500,00 (tolerância R$ 0,01).
 
 ### RF-03 — Contribuição unitária e margem
 - **Entrada:** mesmos dados do RF-02.
@@ -105,9 +113,8 @@ equilíbrio por aumento de volume nesse modelo**.
   clientes em um intervalo.
 - **Resultado observável:** gráfico mostrando resultado (eixo Y) por
   quantidade de clientes (eixo X), com o ponto de equilíbrio identificável
-  quando existir.
-  > **Ambiguidade em aberto:** falta definir o intervalo/passo de clientes
-  > a plotar. Proposta virá no Passo 3 (modelo_calculos.md) para revisão.
+  quando existir. Intervalo e passo conforme `modelo_calculos.md` §9
+  (decidido).
 
 ### RF-07 — Exemplo pronto para carregar
 - **Entrada:** usuário aciona "Carregar exemplo".
@@ -132,8 +139,9 @@ equilíbrio por aumento de volume nesse modelo**.
 - **Resultado observável:** arquivo exportado contém, por cenário: as
   entradas (incluindo benefício percebido), as premissas (moeda,
   periodicidade, taxa hipotética usada, origem dos dados) e as saídas
-  (receita, tributos, resultado, contribuição unitária, margem, clientes
-  de equilíbrio ou mensagem de não equilíbrio).
+  (receita, custo variável total, custo total, tributos, resultado,
+  contribuição unitária, margem, clientes de equilíbrio ou mensagem de
+  não equilíbrio).
 
 ### RF-10 — Interpretação textual dos resultados
 - **Entrada:** resultado calculado de um ou mais cenários.
@@ -157,9 +165,14 @@ equilíbrio por aumento de volume nesse modelo**.
   altera a decisão.
 - **Resultado observável:**
     - **preço que zera o resultado** para a quantidade de clientes
-      informada (caso de referência: R$ 4.000 / 90 = R$ 44,444...);
+      informada (caso de referência: R$ 4.000 / 90 = R$ 44,444..., exibido
+      R$ 44,45);
     - **quantidade mínima de clientes** para o preço informado (caso de
-      referência: 86 clientes).
+      referência: 86 clientes);
+    - com clientes = 0, o preço que zera o resultado não é calculado
+      ("não se aplica com zero clientes"); com taxa = 100%, não existe
+      ("com tributo de 100% sobre a receita, nenhum preço cobre os custos").
+      Ver `modelo_calculos.md` §10.1.
 
 ## 4. Requisitos não funcionais / técnicos obrigatórios
 
@@ -193,7 +206,7 @@ equilíbrio por aumento de volume nesse modelo**.
 
 | # | Categoria | Entrada | Resultado esperado |
 |---|---|---|---|
-| 1 | Caso normal (referência) | Fixos 3.000; var 10; preço 50; clientes 100; taxa 10% | Receita 5.000; tributos 500; resultado 500; margem 10%; equilíbrio 86 |
+| 1 | Caso normal (referência) | Fixos 3.000; var 10; preço 50; clientes 100; taxa 10% | Receita 5.000; custo variável total 1.000; custo total 4.000; tributos 500; resultado 500; margem 10%; equilíbrio 86 |
 | 2 | Caso de limite (contribuição unitária = 0) | Fixos 3.000; var 9; preço 10; clientes 100; taxa 10% | Contribuição unitária = 0; mensagem de não equilíbrio (custo fixo > 0) |
 | 3 | Entrada inválida | Taxa = 150%, ou campo de clientes vazio | Sistema rejeita, mensagem de erro, nenhum cálculo realizado |
 | 4 | Cenário desfavorável (contribuição negativa) | Fixos 3.000; var 10; preço 8; clientes 100; taxa 10% | Contribuição unitária negativa; mensagem de não equilíbrio; resultado negativo |
@@ -201,34 +214,31 @@ equilíbrio por aumento de volume nesse modelo**.
 | 6 | Receita zero | Fixos 3.000; var 10; preço 50; clientes 0; taxa 10% | Receita 0; resultado −3.000; margem não calculada (não exibida); sem erro/divisão por zero |
 | 7 | Limite do equilíbrio (abaixo) | Fixos 3.000; var 10; preço 50; clientes 85; taxa 10% | Resultado −25,00 |
 | 8 | Limite do equilíbrio (exato) | Fixos 3.000; var 10; preço 50; clientes 86; taxa 10% | Resultado +10,00 |
+| 9 | Preço que zera com zero clientes | Fixos 3.000; var 10; preço 50; clientes 0; taxa 10% | Preço que zera não calculado; mensagem "não se aplica com zero clientes"; sem erro/divisão por zero |
+| 10 | Preço que zera com taxa 100% | Fixos 3.000; var 10; preço 50; clientes 100; taxa 100% | Preço que zera inexistente; mensagem "com tributo de 100% sobre a receita, nenhum preço cobre os custos"; contribuição −10; mensagem de não equilíbrio; resultado −4.000 |
 
-**Todos os 8 casos serão automatizados como testes JUnit 5** no Passo 5
+**Todos os 10 casos serão automatizados como testes JUnit 5** no Passo 5
 (núcleo de cálculo).
 
 ## 7. Rastreabilidade
 
 Este documento cobre: funcionalidades mínimas da Opção 2 (PDF, "2 Simulador
-de precificação de um SaaS"), os "Requisitos comuns da aplicação" (PDF,
-páginas 8–9), incluindo exportação CSV/JSON e comparação de três cenários,
-a análise de sensibilidade do Passo 7 e as "Convenções obrigatórias para os
-cinco projetos" (PDF, página 5), conforme revisões da equipe em 28/09/2026.
+de precificação de um SaaS"), incluindo o cálculo de custos, os "Requisitos
+comuns da aplicação" (PDF, páginas 8–9), incluindo exportação CSV/JSON e
+comparação de três cenários, a análise de sensibilidade do Passo 7 e as
+"Convenções obrigatórias para os cinco projetos" (PDF, página 5), conforme
+revisões da equipe em 28 e 29/09/2026.
 
-## 8. Pendências abertas para a próxima revisão
+## 8. Pendências
 
-1. Definir o intervalo/passo de clientes do gráfico (RF-06) — **Proposta
-   registrada em 29/09/2026** em `modelo_calculos.md` §9, ainda **aguardando
-   revisão da equipe** (não é decisão fechada).
-2. ~~Definir o comportamento com `custo_fixo = 0`~~ — **Decidida em
-   29/09/2026:** `custo_fixo = 0` é entrada válida; `clientes_equilibrio = 0`
-   em todos os casos (não há custo fixo a cobrir); se a contribuição
-   unitária for negativa, a aplicação informa que cada cliente adicional
-   gera resultado negativo. Ver `modelo_calculos.md` §8.
-3. ~~Definir o arredondamento de exibição do preço que zera o resultado~~
-   (R$ 44,444...) — **Decidida em 29/09/2026:** manter precisão total no
-   `BigDecimal` internamente; exibir arredondado **para cima** até o
-   centavo (R$ 44,45), mesma lógica de teto usada em `clientes_equilibrio`,
-   pois R$ 44,44 ainda gera resultado negativo (−R$ 0,40). Ver
-   `modelo_calculos.md` §7 e §10.
+1. ~~Intervalo/passo de clientes do gráfico (RF-06)~~ — **Decidida em
+   29/09/2026:** proposta de `modelo_calculos.md` §9 aprovada pela equipe.
+2. ~~Comportamento com `custo_fixo = 0`~~ — **Decidida:** ver
+   `modelo_calculos.md` §8.
+3. ~~Arredondamento de exibição do preço que zera o resultado~~ —
+   **Decidida:** teto ao centavo (R$ 44,45); ver `modelo_calculos.md` §7.
 4. Técnica de gráfico sem dependência externa (RNF-05) — proposta virá no
    Passo 6.
-5. ~~Verificação do pom.xml~~ — **Resolvida em 28/09/2026:** build executado com BUILD SUCCESS; dependências válidas; nenhuma alteração necessária.
+5. ~~Verificação do pom.xml~~ — **Resolvida em 28/09/2026:** build
+   executado com BUILD SUCCESS; dependências válidas; nenhuma alteração
+   necessária.

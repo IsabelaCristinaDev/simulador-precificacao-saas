@@ -63,3 +63,15 @@
 - **Decisão:** ALTERADA. Pedimos correção apenas da frase do cabeçalho (fecha as pendências 2 e 3; pendência 1 com proposta aguardando revisão). Demais conteúdos aceitos.
 - **Evidência:** commit "docs: modelo de cálculos e decisões das pendências 2 e 3".
 - **Pendente:** aprovar a proposta de intervalo/passo do gráfico (seção 9 do modelo_calculos.md).
+
+## Interação 5 – Revisão do modelo de cálculos contra o PDF
+- **Data:** 29/09/2026
+- **Integrante responsável:** Isabela e Wanessa
+- **Objetivo:** Revisar o modelo_calculos.md completo comparando linha a linha com a opção 2 do PDF e decidir o intervalo do gráfico (pendência 1).
+- **Prompt utilizado:** Duas mensagens de revisão: a primeira com aprovação da seção 9 e três correções; a segunda acrescentando duas correções encontradas na releitura do PDF. Depois, pedido de alinhamento das fórmulas entre os dois documentos.
+- **Arquivos alterados:** modelo_calculos.md; requisitos.md (RF-01, RF-02, RF-09, RF-11, §2, §6 com casos 9 e 10, §8 com pendência 1 fechada).
+- **Sugestão da IA:** Proposta de intervalo do gráfico (0 até 2× o maior entre clientes e equilíbrio, até ~100 pontos, marcadores sempre visíveis). Fórmula do preço que zera o resultado sem tratamento para clientes = 0 e taxa = 100%. Valores arredondados classificados como "estimados". Custos calculados apenas como intermediários, sem aparecer como saída.
+- **Verificação humana:** Comparamos o modelo linha a linha com a opção 2 do PDF e conferimos todas as deduções e o caso de referência (corretos). Identificamos: (1) divisão por zero no preço que zera o resultado com clientes = 0 ou taxa = 100%; (2) erro de notação na linha do preço exibido, que resultaria em 45; (3) classificação de "estimados" diferente do sentido do PDF; (4) ausência dos "custos" como saída, exigidos em "Funcionalidades mínimas"; (5) falta da base declarada da taxa e da regra de desembolso único, das "Convenções obrigatórias"; (6) fórmulas de custo adicionadas no modelo, mas não no requisitos.md.
+- **Decisão:** ALTERADA. Seção 9 aprovada. Incluídas regras para clientes = 0 e taxa = 100% (casos 9 e 10), notação corrigida, classificação refeita (fornecidos = dados do PDF; estimados = taxa 10%, 100 clientes, preços R$ 40 e R$ 70; calculados = demais), custo variável total (R$ 1.000) e custo total (R$ 4.000) como saídas obrigatórias, convenções documentadas e fórmulas alinhadas entre os dois documentos.
+- **Evidência:** commit "docs: revisão do modelo de cálculos contra o PDF".
+- **Obs.:** após a revisão, os arquivos requisitos.md e modelo_calculos.md voltaram à versão do último commit (git restore) antes de as alterações serem commitadas. As versões finais foram reconstruídas com apoio do Claude (chat), a partir do conteúdo já revisado e da lista de alterações aprovadas, e conferidas pela equipe. Lição registrada: fazer commit imediatamente após aprovar cada etapa.
