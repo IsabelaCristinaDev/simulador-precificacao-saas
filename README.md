@@ -25,7 +25,7 @@ A aplicação recebe dados, realiza cálculos verificáveis, compara três cená
 - **Testes:** JUnit 5
 - **Desenvolvimento:** IntelliJ IDEA com Claude Code (agente de IA)
 
-## Indicadores calculados
+## Indicadores calculados      
 
 | Indicador | Fórmula | Significado |
 |---|---|---|

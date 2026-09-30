@@ -1,4 +1,4 @@
-# Registro de interações com a IA
+# Registro de interações com a IA     
 
 ## Interação 1 – Análise inicial do problema (Mensagem inicial + Passo 1)
 - **Data:** 28/09/2026
