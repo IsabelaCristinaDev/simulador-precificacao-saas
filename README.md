@@ -73,31 +73,41 @@ Resultado esperado: receita R$ 5.000,00 · tributos R$ 500,00 · resultado R$ 50
 
 ## Como executar
 
-> _A confirmar no Passo 4._
+Pré-requisito: JDK 21 instalado. Não é preciso instalar Maven — o projeto
+usa o Maven Wrapper (`mvnw` / `mvnw.cmd`) já incluído no repositório.
 
-Pré-requisito: JDK 21 instalado.
+```powershell
+# Windows (PowerShell)
+.\mvnw.cmd spring-boot:run
+```
 
 ```bash
-# Windows
-mvnw.cmd spring-boot:run
-
 # Linux / macOS
 ./mvnw spring-boot:run
 ```
 
-Depois, acesse `http://localhost:8080` no navegador.
+Depois, acesse `http://localhost:8080` no navegador — a página abre o
+formulário do simulador (`src/main/resources/static/index.html`),
+servido diretamente pelo Spring Boot.
 
 ## Como rodar os testes
 
-> _A confirmar no Passo 5._
+```powershell
+# Windows (PowerShell)
+.\mvnw.cmd clean test
+```
 
 ```bash
-# Windows
-mvnw.cmd test
-
 # Linux / macOS
-./mvnw test
+./mvnw clean test
 ```
+
+O núcleo de cálculo (pacote `calculo/`) é Java puro, sem dependência do
+Spring (RNF-04): os testes JUnit 5 do caso de referência e dos demais
+casos de `requisitos.md` §6 rodam sem subir a aplicação. Eles serão
+adicionados no Passo 5, junto da implementação das fórmulas — por ora
+só o teste de validação do DTO de entrada (`CenarioRequestValidationTest`)
+e o teste de contexto do Spring Boot existem.
 
 ## Estrutura do repositório
 

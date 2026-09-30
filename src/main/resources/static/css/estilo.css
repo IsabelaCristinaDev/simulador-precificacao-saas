@@ -1,0 +1,34 @@
+/* Estilo simples, sem framework/CDN (RNF-05). */
+
+body {
+    font-family: sans-serif;
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    color: #1a1a1a;
+}
+
+form label {
+    display: block;
+    margin-bottom: 0.75rem;
+}
+
+form input,
+form textarea {
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    margin-top: 0.25rem;
+}
+
+button {
+    margin: 0 0.5rem 0.5rem 0;
+}
+
+#grafico {
+    margin-top: 2rem;
+}
+
+canvas {
+    border: 1px solid #ccc;
+}

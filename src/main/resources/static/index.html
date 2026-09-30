@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Precificação de um SaaS</title>
+    <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+    <h1>Simulador de Precificação de um SaaS</h1>
+    <p>
+        Moeda: R$. Periodicidade: mensal. A taxa de tributos abaixo é
+        <strong>hipotética e editável</strong>, apenas para fins didáticos
+        (RNF-02) — não representa alíquota legal real.
+    </p>
+
+    <!-- RF-01: cadastro de um cenário -->
+    <form id="formulario-cenario">
+        <label>Custo fixo mensal (R$)
+            <input type="number" step="0.01" min="0" name="custoFixo" required>
+        </label>
+        <label>Custo variável por cliente (R$)
+            <input type="number" step="0.01" min="0" name="custoVariavel" required>
+        </label>
+        <label>Preço mensal (R$)
+            <input type="number" step="0.01" min="0" name="preco" required>
+        </label>
+        <label>Quantidade de clientes
+            <input type="number" step="1" min="0" name="clientes" required>
+        </label>
+        <label>Taxa de tributos (%)
+            <input type="number" step="0.01" min="0" max="100" name="taxaPct" required>
+        </label>
+        <label>Benefício percebido pelo cliente
+            <textarea name="beneficioPercebido" required></textarea>
+        </label>
+
+        <button type="button" id="btn-calcular">Calcular</button>
+        <button type="button" id="btn-comparar">Comparar cenários</button>
+        <button type="button" id="btn-exemplo">Carregar exemplo</button>
+        <button type="button" id="btn-exportar">Exportar</button>
+    </form>
+
+    <!-- RF-01 a RF-04, RF-10: preenchido por js/formulario.js no Passo 5 -->
+    <section id="resultados" aria-live="polite"></section>
+
+    <!-- RF-06: preenchido por js/grafico.js no Passo 5 -->
+    <section id="grafico">
+        <canvas id="canvas-grafico" width="600" height="300"></canvas>
+    </section>
+
+    <script src="js/api.js"></script>
+    <script src="js/formulario.js"></script>
+    <script src="js/grafico.js"></script>
+    <script src="js/exportacao.js"></script>
+</body>
+</html>

@@ -347,3 +347,6 @@ Base: `requisitos.md` §§1–4, RF-11; `registro_ia.md` ("Observação – Caso
 de referência resolvido à mão"); PDF da atividade, opção 2 ("Funcionalidades
 mínimas", "Validações", "Teste de referência"), "Convenções obrigatórias
 para os cinco projetos" e Passo 3.
+
+
+

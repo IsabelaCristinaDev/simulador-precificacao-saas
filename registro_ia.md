@@ -75,3 +75,15 @@
 - **Decisão:** ALTERADA. Seção 9 aprovada. Incluídas regras para clientes = 0 e taxa = 100% (casos 9 e 10), notação corrigida, classificação refeita (fornecidos = dados do PDF; estimados = taxa 10%, 100 clientes, preços R$ 40 e R$ 70; calculados = demais), custo variável total (R$ 1.000) e custo total (R$ 4.000) como saídas obrigatórias, convenções documentadas e fórmulas alinhadas entre os dois documentos.
 - **Evidência:** commit "docs: revisão do modelo de cálculos contra o PDF".
 - **Obs.:** após a revisão, os arquivos requisitos.md e modelo_calculos.md voltaram à versão do último commit (git restore) antes de as alterações serem commitadas. As versões finais foram reconstruídas com apoio do Claude (chat), a partir do conteúdo já revisado e da lista de alterações aprovadas, e conferidas pela equipe. Lição registrada: fazer commit imediatamente após aprovar cada etapa.
+
+## Interação 6 – Estrutura do projeto e exemplo mínimo (Passo 4)
+- **Data:** 29/09/2026
+- **Integrante responsável:** Isabela e Wanessa
+- **Objetivo:** Definir a estrutura de pastas separando cálculos, API, dados, frontend e testes, e criar um exemplo mínimo executável.
+- **Prompt utilizado:** Prompt do Passo 4 do PDF, com as preferências da equipe (cálculos em Java puro, API separada, frontend estático sem CDN, sem banco). Primeiro só proposta; criação após revisão.
+- **Arquivos alterados:** estrutura em src/main/java (calculo/, dados/, api/, api/dto/), src/main/resources/static (index.html, css/, js/), src/test/java; README.md (execução e testes).
+- **Sugestão da IA:** Estrutura com núcleo de cálculo sem Spring e API separada. Na primeira proposta: validação apenas nos DTOs da API, exportação via GET e lógica de interpretação (RF-10) dentro da camada api/.
+- **Verificação humana:** Identificamos 4 problemas na proposta: (1) o caso de teste 3 (entrada inválida) não poderia ser testado em calculo/ sem validação lá; (2) o Jackson converte 10,5 clientes em 10 silenciosamente por padrão (ACCEPT_FLOAT_AS_INT), o que burlaria o RF-08; (3) exportação via GET em aplicação stateless não teria os dados dos cenários; (4) regras de interpretação e comparação na camada errada, sem testes JUnit. Pedimos ainda que o teste do 10,5 desserializasse o JSON real. Após a criação, executamos a aplicação (página aberta em localhost:8080) e os testes (.\mvnw.cmd clean test): 2 testes, 0 falhas, BUILD SUCCESS — CenarioRequestValidationTest (1 teste, clientes = 10,5) e o teste padrão de inicialização da aplicação. Os testes do núcleo de cálculo ficam para o Passo 5. A saída confirma Spring Boot v4.1.1, o que reforça a rejeição da sugestão da Interação 3.
+- **Decisão:** ALTERADA. Validação também no construtor de CenarioEntrada; campo clientes como BigDecimal com @Digits e teste desserializando JSON; exportação via POST; InterpretacaoTextual e ComparacaoCenarios movidas para calculo/ com testes próprios.
+- **Evidência:** docs/evidencias/passo4_app.png e passo4_testes.png; commit "feat: estrutura inicial do projeto".
+- **Anotado para o Passo 6:** remover "(RNF-02)" da tela; incluir a identificação do grupo e o aviso de dados fictícios de simulação.
